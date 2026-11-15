@@ -148,7 +148,37 @@ footer .logo svg{width:130px;height:43px}
   .cta>div{padding:40px 16px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* ===== animations ===== */
+.hx{display:grid;grid-template-columns:1.05fr 1fr;gap:24px;align-items:center;text-align:left;margin-bottom:30px}
+.hx h1{margin:0 0 14px}.hx .sub{margin:0 0 22px}
+.hb{display:flex;flex-wrap:wrap;gap:10px}
+.hv{text-align:center}
+#cv{display:block;width:100%;max-width:560px;height:auto;margin:0 auto -6px;touch-action:pan-y;cursor:grab}
+.hl{display:inline-block;background:#fff;border-radius:999px;padding:7px 16px;font-weight:650;font-size:14px;transition:transform .15s}
+.hl:hover{transform:translateY(-2px)}
+.c svg,.hc svg{transition:transform .25s}
+.c:hover svg{transform:rotate(-5deg) scale(1.08)}
+.hc:hover svg{transform:rotate(-8deg) scale(1.1)}
+.b{transition:background .15s,transform .15s}.b:active{transform:scale(.97)}
+.tv svg{animation:fl 4s ease-in-out infinite alternate}
+.tv svg+svg{animation-delay:-2s}
+@keyframes fl{from{transform:translateY(-7px)}to{transform:translateY(7px)}}
+.dl{fill:none;stroke:var(--brand);stroke-width:2.5;stroke-linejoin:round}
+.dl .df{stroke:#E3001B;stroke-width:1.6;stroke-dasharray:3 4}
+.js .dr{stroke-dasharray:1;stroke-dashoffset:1}
+.js .df{opacity:0}
+.js .in .dr{animation:dr 2.4s ease forwards}
+.js .in .df{animation:fd .6s 2.2s forwards}
+@keyframes dr{to{stroke-dashoffset:0}}@keyframes fd{to{opacity:1}}
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.js .rv.in{opacity:1;transform:none}
+.cta h2 i{display:inline-block;animation:pu 2.6s ease-in-out infinite}
+@keyframes pu{50%{transform:scale(1.05) rotate(-1deg)}}
+@media(max-width:760px){.hx{grid-template-columns:1fr;text-align:center;gap:10px;margin-bottom:20px}.hb{justify-content:center}.hx .sub{margin-bottom:16px}}
+@media(prefers-reduced-motion:reduce){.tv svg,.cta h2 i{animation:none}.js .rv{opacity:1;transform:none}.js .dr{stroke-dashoffset:0}.js .df{opacity:1}}
 </style>
+<script>document.documentElement.className='js'</script>
 </head>
 <body>
 <a class="sk" href="#contenu">Aller au contenu</a>
@@ -205,8 +235,17 @@ footer .logo svg{width:130px;height:43px}
 <main id="contenu">
 <div class="hero">
 <div class="w">
-  <h1>Maquettes d’emballage et <em>gabarits de découpe</em>, tout est sur Jokko</h1>
-  <p class="sub">Visualisez vos emballages en 3D, générez des gabarits prêts à imprimer et laissez l’IA vous souffler des idées, de la première esquisse jusqu’à l’impression.</p>
+  <div class="hx">
+    <div>
+      <h1>Maquettes d’emballage et <em>gabarits de découpe</em>, tout est sur Jokko</h1>
+      <p class="sub">Visualisez vos emballages en 3D, générez des gabarits prêts à imprimer et laissez l’IA vous souffler des idées, de la première esquisse jusqu’à l’impression.</p>
+      <p class="hb"><a class="b" href="maquettes.html">Créer une maquette</a><a class="b o" href="gabarits.html">Générer un gabarit</a></p>
+    </div>
+    <div class="hv">
+      <canvas id="cv" width="800" height="600" aria-label="Maquette animée : faites glisser pour la tourner"></canvas>
+      <a id="hl" class="hl" href="maquettes.html">Essayer le générateur →</a>
+    </div>
+  </div>
   <div class="h3">
     <a class="hc" href="maquettes.html"><b>Générateur de maquettes</b><span>Explorer →</span><svg><use href="#box"/></svg></a>
     <a class="hc" href="ia.html"><b>Conception d’emballages par IA</b><span>Essayer →</span><svg><use href="#spark"/></svg></a>
@@ -218,7 +257,7 @@ footer .logo svg{width:130px;height:43px}
 <section id="maquettes">
 <div class="w">
   <h2>Principales catégories de maquettes</h2>
-  <div class="g">
+  <div class="g rv">
     <a class="c" href="maquettes.html?p=box"><svg><use href="#box"/></svg><b>Boîte</b><small>Maquettes</small></a>
     <a class="c" href="maquettes.html?p=tee"><svg><use href="#tee"/></svg><b>T‑shirt</b><small>Maquettes</small></a>
     <a class="c" href="maquettes.html?p=pouch"><svg><use href="#pouch"/></svg><b>Pochette / Sac</b><small>Maquettes</small></a>
@@ -251,7 +290,7 @@ footer .logo svg{width:130px;height:43px}
 <section id="gabarits" class="alt">
 <div class="w">
   <h2>Principales catégories de gabarits</h2>
-  <div class="g">
+  <div class="g rv">
     <a class="c" href="gabarits.html"><svg><use href="#die"/></svg><b>Boîte pliante</b><small>Modèles</small></a>
     <a class="c" href="gabarits.html?type=tuck"><svg><use href="#die2"/></svg><b>Boîte à rabat</b><small>Modèles</small></a>
     <a class="c" href="gabarits.html?type=bag"><svg><use href="#bag"/></svg><b>Sac en papier</b><small>Modèles</small></a>
@@ -269,7 +308,7 @@ footer .logo svg{width:130px;height:43px}
 <div class="w">
   <h2>Les outils de Jokko</h2>
 
-  <div class="t" id="generateur">
+  <div class="t rv" id="generateur">
     <div class="tv"><svg><use href="#box"/></svg><svg><use href="#tee"/></svg></div>
     <div>
       <h3>Un générateur de maquettes en ligne, simple et rapide</h3>
@@ -279,8 +318,8 @@ footer .logo svg{width:130px;height:43px}
     </div>
   </div>
 
-  <div class="t" id="createur">
-    <div class="tv"><svg><use href="#die"/></svg><svg><use href="#die2"/></svg></div>
+  <div class="t rv" id="createur">
+    <div class="tv"><svg class="dl" viewBox="0 0 64 64"><path class="dr" pathLength="1" d="M22 4h20v14h14v28H42v14H22V46H8V18h14z"/><path class="df" d="M22 18h20v28H22z"/></svg><svg><use href="#die2"/></svg></div>
     <div>
       <h3>Un créateur de gabarits de niveau professionnel</h3>
       <p>Réglez les dimensions, le matériau et l’épaisseur du carton en quelques étapes : vous obtenez immédiatement un gabarit de découpe prêt pour l’impression.</p>
@@ -289,7 +328,7 @@ footer .logo svg{width:130px;height:43px}
     </div>
   </div>
 
-  <div class="t" id="labo">
+  <div class="t rv" id="labo">
     <div class="tv"><svg><use href="#cube"/></svg><svg><use href="#bottle"/></svg></div>
     <div>
       <h3>Un studio 3D pensé pour les non‑spécialistes</h3>
@@ -299,7 +338,7 @@ footer .logo svg{width:130px;height:43px}
     </div>
   </div>
 
-  <div class="t" id="ia">
+  <div class="t rv" id="ia">
     <div class="tv"><svg><use href="#img"/></svg><svg><use href="#spark"/></svg></div>
     <div>
       <h3>Un générateur de fonds par IA pour vos visuels produit</h3>
@@ -314,7 +353,7 @@ footer .logo svg{width:130px;height:43px}
 <section id="tous" class="alt">
 <div class="w">
   <h2>Tous les outils</h2>
-  <div class="ch">
+  <div class="ch rv">
     <a href="maquettes.html">Générateur de maquettes</a>
     <a href="gabarits.html">Générateur de gabarits</a>
     <a href="labo.html">Logiciel de modélisation 3D</a>
@@ -335,7 +374,7 @@ footer .logo svg{width:130px;height:43px}
 <section id="entreprise">
 <div class="w">
   <h2>Pour les entreprises</h2>
-  <div class="k">
+  <div class="k rv">
     <div><h3>Service d’impression</h3><p>Faites imprimer vos emballages à partir de vos gabarits et maquettes validés, sans ressaisie des fichiers.</p><a class="lk" href="contact.html">Demander un devis →</a></div>
     <div><h3>API de l’éditeur</h3><p>Intégrez l’éditeur d’emballages et la visualisation 3D directement dans votre site ou votre boutique en ligne.</p><a class="lk" href="contact.html">Parler à l’équipe →</a></div>
     <div><h3>Léger, même en connexion lente</h3><p>Page d’accueil de moins de 50 Ko, sans police ni script externe, et consultable hors ligne après la première visite.</p></div>
@@ -366,6 +405,29 @@ footer .logo svg{width:130px;height:43px}
 
 <script>
 document.querySelectorAll('nav a').forEach(function(a){a.onclick=function(){document.getElementById('m').checked=false}});
+(function(){
+var rv=document.querySelectorAll('.rv');
+if('IntersectionObserver'in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});rv.forEach(function(e){io.observe(e)})}
+else rv.forEach(function(e){e.classList.add('in')});
+// Démo 3D de l'en-tête : chargée après la page, pour ne pas retarder le premier affichage.
+addEventListener('load',function(){
+var cv=document.getElementById('cv'),sc=document.createElement('script');sc.src='mockup.js';
+sc.onload=function(){
+var S=JK.S,a=document.createElement('canvas'),x=a.getContext('2d'),hl=document.getElementById('hl');a.width=900;a.height=600;
+x.fillStyle='#FCD307';x.fillRect(0,0,900,600);x.fillStyle='#093244';x.fillRect(0,0,900,34);x.fillRect(0,566,900,34);
+x.translate(135,198);x.scale(1.75,1.75);x.fill(new Path2D(document.querySelector('#jk path').getAttribute('d')),'evenodd');
+var M=[['box','Boîte'],['can','Canette'],['bottle','Bouteille'],['mug','Mug'],['pouch','Pochette'],['tee','T‑shirt']],i=0,hold=0,vis=true,t0=0,
+still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function set(){var m=M[i];S.p=m[0];JK.preset();S.img=a;S.bgm='none';S.shT=1;S.pit=.32;if(m[0]=='box'){S.L=120;S.Wd=60;S.Hh=150}
+hl.textContent=m[1]+' · essayer ce modèle →';hl.href='maquettes.html?p='+m[0];JK.draw()}
+set();cv.classList.remove('tr');
+cv.addEventListener('pointerdown',function(){hold=Date.now()+4000});
+if('IntersectionObserver'in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(cv);
+if(still)return;
+setInterval(function(){if(vis&&Date.now()>hold){i=(i+1)%M.length;set();cv.classList.remove('tr')}},4500);
+(function loop(t){requestAnimationFrame(loop);if(!vis||document.hidden||Date.now()<hold||t-t0<33)return;t0=t;
+if(S.p=='box')S.yaw=-.55+.5*Math.sin(t/1400);else S.yaw+=.02;JK.draw()})(0)};
+document.body.appendChild(sc)})})();
 if('serviceWorker'in navigator&&location.protocol==='https:')addEventListener('load',function(){navigator.serviceWorker.register('sw.js')});
 </script>
 </body>

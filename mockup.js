@@ -35,7 +35,7 @@
   }
 
   function shadow(cx, cy, rx, ry) {
-    if (S.sh <= 0 || S.bgm == 'none') return;
+    if (S.sh <= 0 || (S.bgm == 'none' && !S.shT)) return;
     x.save(); x.translate(cx, cy); x.scale(1, ry / rx);
     var g = x.createRadialGradient(0, 0, 0, 0, 0, rx);
     g.addColorStop(0, 'rgba(0,0,0,' + S.sh + ')'); g.addColorStop(1, 'rgba(0,0,0,0)');
@@ -240,11 +240,11 @@
   });
   cv.addEventListener('pointerup', function () { drag = null }); cv.addEventListener('pointercancel', function () { drag = null });
 
-  $('#dl').addEventListener('click', function () {
+  if ($('#dl')) $('#dl').addEventListener('click', function () {
     cv.toBlob(function (b) { var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'jokko-maquette.png'; a.click() });
   });
 
   function preset() { var w = WRAP.test(S.p); S.fit = w ? 'cover' : 'contain'; S.size = w ? 100 : 80; S.col = COL[S.p] || '#ffffff' }
-  window.JK = { S: S, draw: draw };
+  window.JK = { S: S, draw: draw, preset: preset };
   preset(); sync(); draw();
 })();
