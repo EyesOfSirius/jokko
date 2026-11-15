@@ -77,7 +77,7 @@
     var w = g.w + 2 * M, h = g.h + 2 * M, ve = preview ? ' vector-effect="non-scaling-stroke"' : '', sw = preview ? 1.6 : .35,
       s = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + [-M, -M, n(w), n(h)].join(' ') + '"' + (preview ? ' role="img" aria-label="Aperçu du gabarit"' : ' width="' + n(w) + 'mm" height="' + n(h) + 'mm"') + '>';
     g.cuts.forEach(function (p) {
-      s += '<path id="coupe" fill="' + (preview ? '#fff' : 'none') + '" stroke="' + (preview ? '#093244' : '#000') + '" stroke-width="' + sw + '"' + ve + ' stroke-linejoin="round" d="M' + p.map(function (q) { return n(q[0]) + ' ' + n(q[1]) }).join('L') + 'Z"/>';
+      s += '<path id="coupe" fill="' + (preview ? '#fff' : 'none') + '" stroke="' + (preview ? '#111315' : '#000') + '" stroke-width="' + sw + '"' + ve + ' stroke-linejoin="round" d="M' + p.map(function (q) { return n(q[0]) + ' ' + n(q[1]) }).join('L') + 'Z"/>';
     });
     s += '<path id="pli" fill="none" stroke="#E3001B" stroke-width="' + sw + '"' + ve + ' stroke-dasharray="' + (preview ? '6 5' : '3 2') + '" d="' + g.folds.map(function (f) { return 'M' + n(f[0]) + ' ' + n(f[1]) + 'L' + n(f[2]) + ' ' + n(f[3]) }).join('') + '"/>';
     return s + '</svg>';

@@ -5,7 +5,7 @@
   var q = new URLSearchParams(location.search);
   var S = {
     p: q.get('p') || 'box', L: +q.get('l') || 120, Wd: +q.get('w') || 60, Hh: +q.get('h') || 160,
-    yaw: -0.6, pit: 0.35, col: '#ffffff', bg: '#E8F0F3', bgm: 'deg', size: 100, fit: 'cover',
+    yaw: -0.6, pit: 0.35, col: '#ffffff', bg: '#EFEFEB', bgm: 'deg', size: 100, fit: 'cover',
     light: -0.7, sh: 0.35, zoom: 1, img: null, bgi: null, face: 'front'
   };
   var init = 1;

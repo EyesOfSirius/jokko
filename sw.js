@@ -1,5 +1,5 @@
 // Jokko – cache hors ligne. Incrémenter V à chaque mise en ligne.
-const V = 'jokko-v9';
+const V = 'jokko-v10';
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(V).then(c => c.addAll(['./','maquettes.html','gabarits.html','labo.html','ia.html','tarifs.html','connexion.html','modeles.html','a-propos.html','contact.html','confidentialite.html','app.css','mockup.js','dieline.js'])).then(() => self.skipWaiting()));
 });
