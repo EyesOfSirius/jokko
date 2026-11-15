@@ -32,10 +32,7 @@
   <div class="pn">
     <span class="fl" id="lm">Modèle</span>
     <div class="seg" role="group" aria-labelledby="lm">
-      <button type="button" data-p="box">Boîte</button><button type="button" data-p="can">Canette</button>
-      <button type="button" data-p="bag">Sac en papier</button><button type="button" data-p="tee">T‑shirt</button>
-      <button type="button" data-p="bottle">Bouteille</button><button type="button" data-p="tube">Tube</button>
-      <button type="button" data-p="mug">Mug</button><button type="button" data-p="pouch">Pochette</button>
+      <button type="button" data-p="box">Boîte</button><button type="button" data-p="can">Canette</button><button type="button" data-p="bottle">Bouteille</button><button type="button" data-p="tube">Tube</button><button type="button" data-p="mug">Mug</button><button type="button" data-p="pouch">Pochette</button><button type="button" data-p="bag">Sac en papier</button><button type="button" data-p="tee">T‑shirt</button><button type="button" data-p="hoodie">Hoodie</button><button type="button" data-p="book">Livre</button><button type="button" data-p="magazine">Magazine</button><button type="button" data-p="phone">Smartphone</button><button type="button" data-p="pizza">Boîte à pizza</button><button type="button" data-p="mailer">Boîte d’expédition</button><button type="button" data-p="jar">Bocal</button><button type="button" data-p="gourde">Gourde</button><button type="button" data-p="pill">Flacon</button><button type="button" data-p="cup">Gobelet</button>
     </div>
     <label class="fl" for="art">Votre visuel (PNG, JPG, SVG)</label><input id="art" type="file" accept="image/*">
     <div class="r2">
@@ -43,7 +40,7 @@
       <div><label class="fl" for="fit">Cadrage</label><select id="fit" data-k="fit"><option value="cover">Remplir</option><option value="contain">Ajuster</option></select></div>
     </div>
     <div id="dims">
-      <span class="fl">Dimensions de la boîte (mm)</span>
+      <span class="fl">Dimensions (mm)</span>
       <div class="r3">
         <input type="number" min="10" max="1000" data-k="L" aria-label="Longueur en mm" title="Longueur">
         <input type="number" min="10" max="1000" data-k="Wd" aria-label="Largeur en mm" title="Largeur">
@@ -60,12 +57,12 @@
   </div>
   <div class="st">
     <canvas id="cv" width="1200" height="900" aria-label="Aperçu de la maquette"></canvas>
-    <div class="bar"><span class="note">Faites glisser l’aperçu pour tourner la boîte, la canette, le mug ou l’étiquette de la bouteille.</span>
+    <div class="bar"><span class="note">Faites glisser l’aperçu pour tourner le modèle.</span>
       <a class="b o s" href="labo.html">Ouvrir dans le labo</a>
       <button class="b s" id="dl" type="button">Télécharger le PNG</button></div>
   </div>
 </div>
-<p class="note">Huit modèles sont disponibles pour l’instant : boîte, canette, sac en papier, T‑shirt, bouteille, tube, mug et pochette. Image exportée en 1200 × 900 px.</p>
+<p class="note">Dix‑huit modèles sont disponibles pour l’instant. Image exportée en 1200 × 900 px.</p>
 </main>
 <footer>
 <div class="w">

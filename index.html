@@ -69,7 +69,15 @@ h1 em,.cta i{font-style:normal;background:var(--brand);color:var(--accent);paddi
 section{padding:48px 0;content-visibility:auto;contain-intrinsic-size:auto 600px}
 h2{font-size:clamp(24px,3.2vw,34px);letter-spacing:-.5px;margin-bottom:22px;display:flex;align-items:center;gap:10px}
 h2:before{content:"";flex:none;width:10px;height:28px;border-radius:5px;background:var(--accent)}
-.g{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:14px}
+.car{position:relative}
+.g{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:6px 2px 12px}
+.g::-webkit-scrollbar{display:none}
+.g .c{flex:0 0 calc((100% - 70px)/6);scroll-snap-align:start}
+.c img{display:block;width:100%;height:auto;aspect-ratio:1;border-radius:10px;background:var(--tint);margin-bottom:8px}
+.cb{position:absolute;top:50%;margin-top:-30px;width:44px;height:44px;border-radius:50%;border:0;background:var(--brand);color:#fff;font:400 26px/1 system-ui,sans-serif;padding:0 0 4px;cursor:pointer;z-index:2;box-shadow:0 4px 12px rgba(9,50,68,.3);transition:opacity .2s,transform .15s}
+.cb:hover{transform:scale(1.08)}
+.cb[data-d="-1"]{left:-14px}.cb[data-d="1"]{right:-14px}
+.cb:disabled{opacity:0;pointer-events:none}
 .c{display:block;border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px;background:#fff;transition:transform .15s,box-shadow .15s}
 .c svg{width:100%;height:84px;color:var(--ink);--f:var(--tint);margin-bottom:8px}
 .c b{display:block;font-size:15px;line-height:1.25}
@@ -113,7 +121,7 @@ footer .logo svg{width:130px;height:43px}
 .f a:hover,.cp a:hover{color:var(--accent)}
 .cp{border-top:1px solid #24505F;margin-top:30px;padding-top:18px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
 
-@media(max-width:1100px){.g{grid-template-columns:repeat(auto-fill,minmax(138px,1fr))}}
+@media(max-width:1100px){.g .c{flex-basis:calc((100% - 42px)/4)}}
 @media(max-width:1300px){.lg{display:none}}
 @media(max-width:1180px){
   .hd{flex-wrap:wrap;height:auto;min-height:64px;gap:0 20px}
@@ -136,9 +144,9 @@ footer .logo svg{width:130px;height:43px}
   .hc{min-height:132px;padding:18px}
   .hc svg{width:92px;height:92px}
   section{padding:34px 0}
-  .g{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 8px;scrollbar-width:none}
-  .g::-webkit-scrollbar{display:none}
-  .g .c{flex:0 0 136px;scroll-snap-align:start}
+  .g{margin:0 -16px;padding:6px 16px 12px;scroll-padding:0 16px}
+  .g .c{flex:0 0 150px}
+  .cb{display:none}
   .t{grid-template-columns:1fr;gap:16px;padding:18px 0}
   .t:nth-of-type(even) .tv{order:0}
   .tv{min-height:160px}
@@ -257,32 +265,32 @@ footer .logo svg{width:130px;height:43px}
 <section id="maquettes">
 <div class="w">
   <h2>Principales catégories de maquettes</h2>
-  <div class="g rv">
-    <a class="c" href="maquettes.html?p=box"><svg><use href="#box"/></svg><b>Boîte</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html?p=tee"><svg><use href="#tee"/></svg><b>T‑shirt</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html?p=pouch"><svg><use href="#pouch"/></svg><b>Pochette / Sac</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#book"/></svg><b>Livre</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html?p=bottle"><svg><use href="#bottle"/></svg><b>Bouteille</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html?p=can"><svg><use href="#can"/></svg><b>Canette</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html?p=tube"><svg><use href="#tube"/></svg><b>Tube</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#cup"/></svg><b>Gobelet / Contenant</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#food"/></svg><b>Emballage alimentaire</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#phone"/></svg><b>Smartphone</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html?p=mug"><svg><use href="#mug"/></svg><b>Mug</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#mag"/></svg><b>Magazine</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#hood"/></svg><b>Hoodie</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#flask"/></svg><b>Gourde</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#gift"/></svg><b>Boîte cadeau</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html?p=bag"><svg><use href="#bag"/></svg><b>Sac en papier</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#tray"/></svg><b>Emballage pour pizza</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#flask"/></svg><b>Flacon de compléments</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#lid"/></svg><b>Boîte d’expédition</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html?p=bottle"><svg><use href="#bottle"/></svg><b>Bouteille en plastique</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#cube"/></svg><b>Boîte produit</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#bag"/></svg><b>Boîte avec poignée</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#can"/></svg><b>Bocal</b><small>Maquettes</small></a>
-    <a class="c" href="maquettes.html"><svg><use href="#mag"/></svg><b>Impression</b><small>Maquettes</small></a>
-  </div>
+  <div class="car rv"><button class="cb" data-d="-1" type="button" aria-label="Précédent">‹</button><div class="g">
+    <a class="c" href="maquettes.html?p=box"><img src="img/box.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Boîte</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=tee"><img src="img/tee.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>T‑shirt</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=pouch"><img src="img/pouch.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Pochette / Sac</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=book"><img src="img/book.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Livre</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=bottle"><img src="img/bottle.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Bouteille</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=can"><img src="img/can.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Canette</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=tube"><img src="img/tube.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Tube</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=cup"><img src="img/cup.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Gobelet / Contenant</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=box"><img src="img/food.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Emballage alimentaire</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=phone"><img src="img/phone.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Smartphone</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=mug"><img src="img/mug.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Mug</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=magazine"><img src="img/magazine.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Magazine</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=hoodie"><img src="img/hoodie.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Hoodie</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=gourde"><img src="img/gourde.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Gourde</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=box"><img src="img/gift.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Boîte cadeau</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=bag"><img src="img/bag.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Sac en papier</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=pizza"><img src="img/pizza.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Emballage pour pizza</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=pill"><img src="img/pill.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Flacon de compléments</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=mailer"><img src="img/mailer.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Boîte d’expédition</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=bottle"><img src="img/plastic.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Bouteille en plastique</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=box"><img src="img/product.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Boîte produit</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=box"><img src="img/gable.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Boîte avec poignée</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=jar"><img src="img/jar.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Bocal</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=magazine"><img src="img/print.webp" width="360" height="360" loading="lazy" decoding="async" alt=""><b>Impression</b><small>Maquettes</small></a>
+  </div><button class="cb" data-d="1" type="button" aria-label="Suivant">›</button></div>
   <p class="more"><a class="b o" href="modeles.html#maquettes">Voir toutes les maquettes</a></p>
 </div>
 </section>
@@ -290,7 +298,7 @@ footer .logo svg{width:130px;height:43px}
 <section id="gabarits" class="alt">
 <div class="w">
   <h2>Principales catégories de gabarits</h2>
-  <div class="g rv">
+  <div class="car rv"><button class="cb" data-d="-1" type="button" aria-label="Précédent">‹</button><div class="g">
     <a class="c" href="gabarits.html"><svg><use href="#die"/></svg><b>Boîte pliante</b><small>Modèles</small></a>
     <a class="c" href="gabarits.html?type=tuck"><svg><use href="#die2"/></svg><b>Boîte à rabat</b><small>Modèles</small></a>
     <a class="c" href="gabarits.html?type=bag"><svg><use href="#bag"/></svg><b>Sac en papier</b><small>Modèles</small></a>
@@ -299,7 +307,7 @@ footer .logo svg{width:130px;height:43px}
     <a class="c" href="gabarits.html?type=tray"><svg><use href="#tray"/></svg><b>Boîte plateau</b><small>Modèles</small></a>
     <a class="c" href="gabarits.html"><svg><use href="#gift"/></svg><b>Boîte rigide</b><small>Modèles</small></a>
     <a class="c" href="gabarits.html?type=env"><svg><use href="#env"/></svg><b>Enveloppe</b><small>Modèles</small></a>
-  </div>
+  </div><button class="cb" data-d="1" type="button" aria-label="Suivant">›</button></div>
   <p class="more"><a class="b o" href="modeles.html#gabarits">Voir tous les modèles de gabarits</a></p>
 </div>
 </section>
@@ -409,6 +417,20 @@ document.querySelectorAll('nav a').forEach(function(a){a.onclick=function(){docu
 var rv=document.querySelectorAll('.rv');
 if('IntersectionObserver'in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});rv.forEach(function(e){io.observe(e)})}
 else rv.forEach(function(e){e.classList.add('in')});
+// Carrousels : flèches, défilement automatique, pause au survol ou au toucher.
+var calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.querySelectorAll('.car').forEach(function(c){
+var g=c.querySelector('.g'),bs=c.querySelectorAll('.cb'),stop=0,vis=false;
+function st(){bs[0].disabled=g.scrollLeft<4;bs[1].disabled=g.scrollLeft+g.clientWidth>g.scrollWidth-4}
+function go(d){g.scrollBy({left:d,behavior:calm?'auto':'smooth'})}
+bs.forEach(function(b){b.onclick=function(){stop=Date.now()+8000;go(b.dataset.d*g.clientWidth*.82)}});
+g.addEventListener('scroll',st,{passive:true});st();
+['pointerenter','touchstart','focusin'].forEach(function(e){c.addEventListener(e,function(){stop=Date.now()+8000},{passive:true})});
+c.addEventListener('pointerleave',function(){stop=Date.now()+1500});
+if(calm||!('IntersectionObserver'in window))return;
+new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(c);
+setInterval(function(){if(!vis||document.hidden||Date.now()<stop)return;
+if(g.scrollLeft+g.clientWidth>g.scrollWidth-4)g.scrollTo({left:0,behavior:'smooth'});else go(g.querySelector('.c').offsetWidth+14)},3200)});
 // Démo 3D de l'en-tête : chargée après la page, pour ne pas retarder le premier affichage.
 addEventListener('load',function(){
 var cv=document.getElementById('cv'),sc=document.createElement('script');sc.src='mockup.js';

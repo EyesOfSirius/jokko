@@ -6,9 +6,9 @@
   var S = {
     p: q.get('p') || 'box', L: +q.get('l') || 120, Wd: +q.get('w') || 60, Hh: +q.get('h') || 160,
     yaw: -0.6, pit: 0.35, col: '#ffffff', bg: '#E8F0F3', bgm: 'deg', size: 100, fit: 'cover',
-    light: -0.7, sh: 0.35, zoom: 1, img: null, bgi: null
+    light: -0.7, sh: 0.35, zoom: 1, img: null, bgi: null, face: 'front'
   };
-  if (!/^(box|can|bag|tee|bottle|tube|mug|pouch)$/.test(S.p)) S.p = 'box';
+  var init = 1;
 
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)) }
 
@@ -78,7 +78,7 @@
       var O = R(f[0]), U = R(f[1]), V = R(f[2]), w = f[4], h = f[5];
       x.setTransform(s * U[0] / w, -s * U[1] / w, s * V[0] / h, -s * V[1] / h, cx + s * O[0], cz - s * O[1]);
       x.fillStyle = S.col; x.fillRect(0, 0, w, h);
-      if (f[6]) art(w, h);
+      if (F.indexOf(f) == (S.face == 'top' ? 4 : 0)) art(w, h);
       var lit = Math.max(0, (f[3][0] * lv[0] + f[3][1] * lv[1] + f[3][2] * lv[2]) / ln);
       x.fillStyle = 'rgba(0,0,0,' + ((1 - lit) * .42).toFixed(3) + ')'; x.fillRect(0, 0, w, h);
       x.strokeStyle = 'rgba(0,0,0,.18)'; x.lineWidth = 1 / s; x.strokeRect(0, 0, w, h);
@@ -157,16 +157,47 @@
     g.addColorStop(0, 'rgba(0,0,0,' + a + ')'); g.addColorStop(.3, 'rgba(255,255,255,.12)'); g.addColorStop(.55, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,' + (a + .1) + ')');
     x.fillStyle = g; x.fillRect(0, 0, 400, 400); x.restore();
   }
-  function bottle() {
+  // Flacons : silhouette + bouchon + étiquette cylindrique. d = [chemin, x0, x1, bouchon [x,y,w,h], couleur bouchon, rayon, haut, hauteur, étiquette blanche ?]
+  var FL = {
+    bottle: ['M186 48V92C186 122 140 124 140 160V358Q140 372 154 372H246Q260 372 260 358V160C260 124 214 122 214 92V48Z', 140, 260, [181, 18, 38, 32], '#1D2B33', 60, 196, 140, 1],
+    gourde: ['M176 62V84C176 100 152 104 152 130V356Q152 372 168 372H232Q248 372 248 356V130C248 104 224 100 224 84V62Z', 152, 248, [170, 24, 60, 40], '#1D2B33', 48, 160, 170, 0],
+    pill: ['M150 98Q150 82 166 82H234Q250 82 250 98V356Q250 372 234 372H166Q150 372 150 356Z', 150, 250, [156, 36, 88, 48], '#E3E8EA', 50, 140, 180, 0],
+    jar: ['M132 122Q132 106 148 106H252Q268 106 268 122V352Q268 372 248 372H152Q132 372 132 352Z', 132, 268, [128, 64, 144, 44], '#1D2B33', 68, 176, 130, 1]
+  };
+  function flacon() {
+    var d = FL[S.p];
     flat(function (k, ox, oy) {
-      var P = new Path2D('M186 48V92C186 122 140 124 140 160V358Q140 372 154 372H246Q260 372 260 358V160C260 124 214 122 214 92V48Z'); P.x0 = 140; P.x1 = 260;
-      x.fillStyle = S.col; x.fill(P); sides(P, .4);
+      var P = new Path2D(d[0]), c = d[3]; P.x0 = d[1]; P.x1 = d[2];
+      x.fillStyle = S.col; x.fill(P); sides(P, d[8] ? .4 : .28);
       x.strokeStyle = 'rgba(0,0,0,.3)'; x.lineWidth = 1.5; x.stroke(P);
-      x.fillStyle = '#1D2B33'; x.beginPath(); x.rect(181, 18, 38, 32); x.fill();
-      x.fillStyle = 'rgba(255,255,255,.18)'; x.fillRect(188, 18, 6, 32);
+      x.fillStyle = d[4]; x.beginPath(); x.rect(c[0], c[1], c[2], c[3]); x.fill(); x.strokeStyle = 'rgba(0,0,0,.25)'; x.stroke();
+      x.fillStyle = 'rgba(255,255,255,.18)'; x.fillRect(c[0] + c[2] * .2, c[1], c[2] * .14, c[3]);
       x.setTransform(1, 0, 0, 1, 0, 0);
-      var t = oy + 196 * k; wrap(ox + 200 * k, 60 * k, function () { return t }, 140 * k, '#FFFFFF');
-      if (!S.img) { x.fillStyle = 'rgba(9,50,68,.6)'; x.font = '600 ' + 13 * k + 'px system-ui,sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('Votre visuel', ox + 200 * k, t + 70 * k) }
+      var t = oy + d[6] * k; wrap(ox + 200 * k, d[5] * k, function () { return t }, d[7] * k, d[8] ? '#FFFFFF' : S.col);
+      if (!S.img) { x.fillStyle = 'rgba(9,50,68,.6)'; x.font = '600 ' + 13 * k + 'px system-ui,sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('Votre visuel', ox + 200 * k, t + d[7] * k / 2) }
+    });
+  }
+  function cup() {
+    flat(function () {
+      var P = new Path2D('M118 100H282L262 372H138Z'); P.x0 = 118; P.x1 = 282;
+      x.fillStyle = S.col; x.fill(P);
+      x.save(); x.clip(P); x.translate(140, 150); art(120, 170); x.restore();
+      sides(P, .22);
+      x.strokeStyle = 'rgba(0,0,0,.28)'; x.lineWidth = 1.5; x.lineJoin = 'round'; x.stroke(P);
+      x.fillStyle = '#F4F6F7'; x.beginPath(); x.rect(108, 76, 184, 26); x.rect(128, 60, 144, 16); x.fill(); x.stroke();
+    });
+  }
+  function hoodie() {
+    flat(function () {
+      var P = new Path2D('M150 54L62 96L22 252L78 270L104 172V372H296V172L322 270L378 252L338 96L250 54Q200 104 150 54Z'), Hd = new Path2D('M150 54Q200 -14 250 54Q200 104 150 54Z');
+      P.x0 = 22; P.x1 = 378;
+      x.fillStyle = S.col; x.fill(Hd); x.fillStyle = 'rgba(0,0,0,.22)'; x.fill(Hd);
+      x.fillStyle = S.col; x.fill(P);
+      x.save(); x.clip(P); x.translate(140, 150); art(120, 120); x.restore();
+      sides(P, .14);
+      x.strokeStyle = 'rgba(0,0,0,.28)'; x.lineWidth = 2; x.lineJoin = 'round'; x.stroke(P); x.stroke(Hd);
+      x.lineWidth = 1.5; x.beginPath(); x.moveTo(140, 372); x.lineTo(152, 296); x.lineTo(248, 296); x.lineTo(260, 372);
+      x.moveTo(186, 84); x.lineTo(184, 140); x.moveTo(214, 84); x.lineTo(216, 140); x.stroke();
     });
   }
   function tube() {
@@ -194,17 +225,24 @@
     });
   }
 
-  var COL = { bottle: '#5B3A1E' }, WRAP = /^(box|can|mug|bottle)$/;
+  // Modèles dérivés de la boîte : dimensions, face imprimée, couleur, inclinaison.
+  var PR = {
+    box: { L: 120, Wd: 60, Hh: 160 }, book: { L: 130, Wd: 22, Hh: 190 }, magazine: { L: 210, Wd: 5, Hh: 280 }, phone: { L: 75, Wd: 9, Hh: 155, col: '#16222A' },
+    pizza: { L: 300, Wd: 300, Hh: 40, face: 'top', pit: .75 }, mailer: { L: 250, Wd: 180, Hh: 90, face: 'top', col: '#C19A6B', pit: .6 }
+  };
+  var DR = { can: can, tee: tee, bag: bag, bottle: flacon, gourde: flacon, pill: flacon, jar: flacon, tube: tube, mug: mug, pouch: pouch, cup: cup, hoodie: hoodie };
+  var COL = { bottle: '#5B3A1E', jar: '#DCE6EA' }, WRAP = /^(box|book|magazine|phone|pizza|mailer|can|mug|bottle|gourde|pill|jar)$/;
+  if (!PR[S.p] && !DR[S.p]) S.p = 'box';
   var queued = 0;
   function draw() {
     if (queued) return; queued = 1;
-    requestAnimationFrame(function () { queued = 0; background(); ({ box: box, can: can, tee: tee, bag: bag, bottle: bottle, tube: tube, mug: mug, pouch: pouch })[S.p]() });
+    requestAnimationFrame(function () { queued = 0; background(); (DR[S.p] || box)() });
   }
 
   function sync() {
     $$('[data-k]').forEach(function (e) { if (S[e.dataset.k] != null) e.value = S[e.dataset.k] });
     $$('[data-p]').forEach(function (b) { var on = b.dataset.p == S.p; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on) });
-    var d = $('#dims'); if (d) d.hidden = S.p != 'box';
+    var d = $('#dims'); if (d) d.hidden = !PR[S.p];
     var c = $('#bgc'); if (c) c.hidden = S.bgm == 'none' || S.bgm == 'img';
     var f = $('#bgf'); if (f) f.closest('div').hidden = S.bgm != 'img';
     cv.classList.toggle('tr', S.bgm == 'none');
@@ -244,7 +282,11 @@
     cv.toBlob(function (b) { var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'jokko-maquette.png'; a.click() });
   });
 
-  function preset() { var w = WRAP.test(S.p); S.fit = w ? 'cover' : 'contain'; S.size = w ? 100 : 80; S.col = COL[S.p] || '#ffffff' }
+  function preset() {
+    var w = WRAP.test(S.p), b = PR[S.p], k; S.fit = w ? 'cover' : 'contain'; S.size = w ? 100 : 80; S.col = COL[S.p] || '#ffffff'; S.face = 'front';
+    if (b) { if (!(init && S.p == 'box')) for (k in b) S[k] = b[k]; if (!b.pit) S.pit = .35 }
+    init = 0;
+  }
   window.JK = { S: S, draw: draw, preset: preset };
   preset(); sync(); draw();
 })();
