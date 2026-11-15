@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jokko – Maquettes d’emballage, gabarits de découpe et création avec IA</title>
+<meta name="description" content="Jokko réunit maquettes 3D, gabarits de découpe prêts à imprimer et outils de création avec IA pour concevoir vos emballages, de l’idée à l’impression.">
+<meta name="theme-color" content="#FCD307">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' rx='36' fill='%23FCD307'/%3E%3Cpath fill='%23093244' d='M41 34h22v27h10l21-27h29L93 74l28 39h10V33h22v133h-22v-28h-10l-21 28H72l29-40-28-39H63v79H41z'/%3E%3C/svg%3E">
+<style>
+/* ===== Couleurs de marque : modifier uniquement ce bloc ===== */
+:root{
+  --brand:#093244;        /* bleu nuit du logo (boutons, liens) */
+  --brand-dark:#051F2B;   /* survol */
+  --accent:#FCD307;       /* jaune du logo */
+  --tint:#FFF6C2;         /* jaune clair */
+  --tint-2:#E8F0F3;       /* bleu clair */
+  --ink:#0B2230;          /* texte */
+  --muted:#52636D;        /* texte secondaire */
+  --line:#E3E8EA;         /* bordures */
+  --bg:#fff;
+  --dark:#093244;         /* pied de page */
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+svg{display:block}
+.w{max-width:1200px;margin:0 auto;padding:0 16px}
+.i{fill:var(--f,#fff);stroke:currentColor;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;box-shadow:0 0 0 3px #fff}
+footer :focus-visible{outline-color:var(--accent);box-shadow:none}
+.sk{position:absolute;left:-999px}.sk:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:9}
+
+/* boutons */
+.b{display:inline-block;white-space:nowrap;padding:12px 22px;border-radius:999px;font-weight:650;border:2px solid var(--brand);background:var(--brand);color:#fff;transition:background .15s}
+.b:hover{background:var(--brand-dark);border-color:var(--brand-dark)}
+.b.o{background:transparent;color:var(--brand)}
+.b.o:hover{background:var(--tint-2)}
+.b.s{padding:8px 16px;font-size:14px}
+
+/* en-tête */
+header{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;gap:20px;height:64px}
+.logo{display:flex;align-items:center;color:var(--brand)}
+.logo svg{width:100px;height:33px}
+nav{display:flex;gap:4px;margin-right:auto}
+nav a{white-space:nowrap;padding:8px 9px;border-radius:8px;font-size:14.5px;font-weight:550}
+nav a:hover{background:var(--tint)}
+.act{display:flex;align-items:center;gap:10px}
+.lg{font-size:14px;color:var(--muted)}
+#m,.mb{display:none}
+
+/* hero */
+.hero{background:var(--accent);padding:56px 0 48px;text-align:center}
+h1{font-size:clamp(30px,5vw,54px);line-height:1.12;letter-spacing:-1px;max-width:900px;margin:0 auto 12px}
+h1 em,.cta i{font-style:normal;background:var(--brand);color:var(--accent);padding:0 .18em;border-radius:.18em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.sub{color:var(--ink);font-size:18px;max-width:640px;margin:0 auto 32px}
+.h3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:left}
+.hc{position:relative;display:block;border-radius:22px;padding:24px;min-height:210px;overflow:hidden;border:0;background:#fff;transition:transform .15s,box-shadow .15s}
+.hc:hover,.c:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(9,50,68,.16)}
+.hc b{display:block;font-size:22px;line-height:1.2;max-width:60%}
+.hc span{display:inline-block;margin-top:10px;color:var(--brand);font-weight:650;font-size:15px}
+.hc svg{position:absolute;right:14px;bottom:10px;width:120px;height:120px;color:var(--brand)}
+
+/* sections */
+section{padding:48px 0;content-visibility:auto;contain-intrinsic-size:auto 600px}
+h2{font-size:clamp(24px,3.2vw,34px);letter-spacing:-.5px;margin-bottom:22px;display:flex;align-items:center;gap:10px}
+h2:before{content:"";flex:none;width:10px;height:28px;border-radius:5px;background:var(--accent)}
+.g{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:14px}
+.c{display:block;border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px;background:#fff;transition:transform .15s,box-shadow .15s}
+.c svg{width:100%;height:84px;color:var(--ink);--f:var(--tint);margin-bottom:8px}
+.c b{display:block;font-size:15px;line-height:1.25}
+.c small{color:var(--muted);font-size:13px}
+.more{margin-top:22px;text-align:center}
+
+/* outils */
+.t{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;padding:26px 0}
+.t:nth-of-type(even) .tv{order:2}
+.tv{border-radius:24px;background:var(--tint);min-height:240px;display:flex;align-items:center;justify-content:center;gap:10px;padding:20px}
+.t:nth-of-type(even) .tv{background:var(--tint-2)}
+.tv svg{width:118px;height:118px;color:var(--brand)}
+.tv svg+svg{width:80px;height:80px;color:var(--ink);--f:var(--accent)}
+.t h3{font-size:clamp(21px,2.4vw,28px);line-height:1.2;margin-bottom:10px}
+.t p{color:var(--muted);margin-bottom:10px}
+.t .r{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.ch{display:flex;flex-wrap:wrap;gap:10px}
+.ch a{padding:9px 15px;border:1px solid var(--line);border-radius:999px;font-size:14.5px;font-weight:550;background:#fff}
+.ch a:hover{border-color:var(--brand);color:var(--brand)}
+.ch .ai{background:var(--tint-2);border-color:var(--accent)}
+.alt{background:#F5F8F9}
+.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.k>*{border:1px solid var(--line);border-radius:18px;padding:22px;background:#fff}
+.k h3{font-size:18px;margin-bottom:6px}
+.k p{color:var(--muted);font-size:15px}
+.k a.lk{display:inline-block;margin-top:10px;color:var(--brand);font-weight:650}
+
+/* appel à l'action */
+.cta{margin:0 16px}
+.cta>div{max-width:1168px;margin:0 auto;border-radius:28px;background:var(--accent);color:var(--ink);text-align:center;padding:56px 20px}
+.cta h2{display:block;line-height:1.3;font-size:clamp(26px,4.4vw,46px);text-transform:uppercase;margin-bottom:22px}
+.cta h2:before{display:none}
+
+/* pied de page */
+footer{background:var(--dark);color:#C5D3D9;margin-top:56px;padding:44px 0 26px;font-size:14px;content-visibility:auto;contain-intrinsic-size:auto 700px}
+footer .logo{color:var(--accent);margin-bottom:26px}
+footer .logo svg{width:130px;height:43px}
+.f{display:grid;grid-template-columns:repeat(6,1fr);gap:22px}
+.f b{display:block;color:#fff;margin-bottom:10px;font-size:15px}
+.f a{display:block;padding:4px 0}
+.f a:hover,.cp a:hover{color:var(--accent)}
+.cp{border-top:1px solid #24505F;margin-top:30px;padding-top:18px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+
+@media(max-width:1100px){.g{grid-template-columns:repeat(auto-fill,minmax(138px,1fr))}}
+@media(max-width:1300px){.lg{display:none}}
+@media(max-width:1180px){
+  .hd{flex-wrap:wrap;height:auto;min-height:64px;gap:0 20px}
+  .logo{height:64px}
+  #m{display:block;position:absolute;opacity:0;width:1px;height:1px}
+  #m:focus-visible+.mb{outline:3px solid var(--ink)}
+  .mb{display:block;margin-left:auto;padding:8px;cursor:pointer;border-radius:8px}
+  .mb svg{width:26px;height:26px}
+  nav,.act{display:none}
+  #m:checked~nav,#m:checked~.act{display:flex;flex:0 0 100%}
+  #m:checked~nav{flex-direction:column;border-top:1px solid var(--line);padding:6px 0}
+  #m:checked~nav a{padding:12px 8px;font-size:16px}
+  #m:checked~.act{padding:6px 0 16px}
+  .f{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:760px){
+  .hero{padding:36px 0 24px}
+  .sub{font-size:16px;margin-bottom:22px}
+  .h3{grid-template-columns:1fr;gap:12px}
+  .hc{min-height:132px;padding:18px}
+  .hc svg{width:92px;height:92px}
+  section{padding:34px 0}
+  .g{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 8px;scrollbar-width:none}
+  .g::-webkit-scrollbar{display:none}
+  .g .c{flex:0 0 136px;scroll-snap-align:start}
+  .t{grid-template-columns:1fr;gap:16px;padding:18px 0}
+  .t:nth-of-type(even) .tv{order:0}
+  .tv{min-height:160px}
+  .tv svg{width:86px;height:86px}
+  .tv svg+svg{width:60px;height:60px}
+  .f{grid-template-columns:repeat(2,1fr)}
+  .cta>div{padding:40px 16px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="sk" href="#contenu">Aller au contenu</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="box" viewBox="0 0 64 64"><path class="i" d="M8 22 32 10l24 12v22L32 56 8 44z"/><path class="i" d="M8 22l24 12 24-12M32 34v22" fill="none"/></symbol>
+<symbol id="tee" viewBox="0 0 64 64"><path class="i" d="M22 10 8 18l6 10 6-3v29h24V25l6 3 6-10-14-8c-2 4-6 6-10 6s-8-2-10-6z"/></symbol>
+<symbol id="pouch" viewBox="0 0 64 64"><path class="i" d="M18 8h28l-3 8 7 36a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4l7-36z"/><path class="i" d="M21 16h22"/></symbol>
+<symbol id="book" viewBox="0 0 64 64"><path class="i" d="M14 10h30a6 6 0 0 1 6 6v38H20a6 6 0 0 1-6-6z"/><path class="i" d="M14 48a6 6 0 0 1 6-6h30M24 20h16" fill="none"/></symbol>
+<symbol id="bottle" viewBox="0 0 64 64"><path class="i" d="M27 6h10v10c0 4 7 7 7 16v22a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V32c0-9 7-12 7-16z"/><path class="i" d="M20 36h24v12H20z" fill="#fff"/></symbol>
+<symbol id="can" viewBox="0 0 64 64"><path class="i" d="M20 12c0-3 5-5 12-5s12 2 12 5v40c0 3-5 5-12 5s-12-2-12-5z"/><path class="i" d="M20 12c0 3 5 5 12 5s12-2 12-5M20 26h24M20 40h24" fill="none"/></symbol>
+<symbol id="tube" viewBox="0 0 64 64"><path class="i" d="M22 8h20l4 40H18z"/><path class="i" d="M24 48h16v8H24zM21 18h22"/></symbol>
+<symbol id="cup" viewBox="0 0 64 64"><path class="i" d="M16 14h32l-5 42H21z"/><path class="i" d="M14 10h36v4H14zM18 28h28"/></symbol>
+<symbol id="food" viewBox="0 0 64 64"><path class="i" d="M10 26h44l-5 28H15z"/><path class="i" d="M10 26l8-12h28l8 12M26 14c0-5 12-5 12 0" fill="none"/></symbol>
+<symbol id="phone" viewBox="0 0 64 64"><rect class="i" x="19" y="6" width="26" height="52" rx="5"/><path class="i" d="M28 12h8"/></symbol>
+<symbol id="mug" viewBox="0 0 64 64"><path class="i" d="M12 16h30v30a8 8 0 0 1-8 8H20a8 8 0 0 1-8-8z"/><path class="i" d="M42 22h4a7 7 0 0 1 0 14h-4" fill="none"/></symbol>
+<symbol id="mag" viewBox="0 0 64 64"><path class="i" d="M12 10h40v44H12z"/><path class="i" d="M18 18h28v14H18zM18 40h18M18 46h12" fill="#fff"/></symbol>
+<symbol id="hood" viewBox="0 0 64 64"><path class="i" d="M24 8h16l14 10-5 10-5-3v31H20V25l-5 3-5-10z"/><path class="i" d="M24 8c0 8 3 12 8 12s8-4 8-12M26 40h12v8H26z" fill="none"/></symbol>
+<symbol id="flask" viewBox="0 0 64 64"><path class="i" d="M26 6h12v8H26z"/><path class="i" d="M24 14h16c3 3 4 6 4 10v28a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V24c0-4 1-7 4-10z"/></symbol>
+<symbol id="gift" viewBox="0 0 64 64"><path class="i" d="M10 24h44v32H10z"/><path class="i" d="M8 16h48v8H8z"/><path class="i" d="M32 16v40M32 16c-4-10-16-8-10 0M32 16c4-10 16-8 10 0" fill="none"/></symbol>
+<symbol id="bag" viewBox="0 0 64 64"><path class="i" d="M14 20h36l2 36H12z"/><path class="i" d="M24 20v-4a8 8 0 0 1 16 0v4" fill="none"/></symbol>
+<symbol id="die" viewBox="0 0 64 64"><path class="i" d="M22 4h20v14h14v28H42v14H22V46H8V18h14z"/><path class="i" d="M22 18h20v28H22z" fill="none" stroke-dasharray="3 4"/></symbol>
+<symbol id="die2" viewBox="0 0 64 64"><path class="i" d="M6 22h10l2-10h12l2 10h10l2-10h12l2 10v24H6z"/><path class="i" d="M18 22v24M32 22v24M44 22v24M6 46l4 8h44l4-8" fill="none" stroke-dasharray="3 4"/></symbol>
+<symbol id="tray" viewBox="0 0 64 64"><path class="i" d="M6 24h52l-6 26H12z"/><path class="i" d="M6 24l8-8h36l8 8" fill="none"/></symbol>
+<symbol id="lid" viewBox="0 0 64 64"><path class="i" d="M12 30h40v26H12z"/><path class="i" d="M8 12h48v10H8z"/></symbol>
+<symbol id="env" viewBox="0 0 64 64"><path class="i" d="M8 16h48v32H8z"/><path class="i" d="M8 16l24 18 24-18" fill="none"/></symbol>
+<symbol id="spark" viewBox="0 0 64 64"><path class="i" d="M32 6l6 18 18 8-18 8-6 18-6-18-18-8 18-8z"/></symbol>
+<symbol id="cube" viewBox="0 0 64 64"><path class="i" d="M32 6l24 13v26L32 58 8 45V19z"/><path class="i" d="M8 19l24 13 24-13M32 32v26" fill="none"/></symbol>
+<symbol id="img" viewBox="0 0 64 64"><rect class="i" x="8" y="12" width="48" height="40" rx="6"/><path class="i" d="M8 44l14-14 12 12 8-8 14 14" fill="none"/><circle class="i" cx="42" cy="24" r="4"/></symbol>
+<symbol id="jk" viewBox="-1 -1 360 120"><path fill="currentColor" fill-rule="evenodd" d="M307.8 118C292.2 116.4 282.2 110.5 276.8 99.9L275.7 97.6L275.5 98.1C275.4 98.4 275.3 102.3 275.3 106.7C275.3 111.4 275.2 114.9 275.1 115C274.9 115.2 270 115.2 263 115.2L251.1 115.1L251.1 101.4L251 87.8L245.7 87.8L240.3 87.8L239.3 88.9C235.4 93.7 219 113.6 218.3 114.3L217.4 115.3L201.8 115.2C192.7 115.2 186.2 115.2 186.1 115C186.1 114.9 191.9 107.4 199.1 98.5C206.2 89.5 213 81 214.1 79.7L216 77.2L215.8 76.8C215.6 76.6 211.6 71.7 206.8 65.9L198.1 55.4L197.2 55.3C196.8 55.2 194.3 55.2 191.9 55.2L187.4 55.4L187.2 69L187.1 82.6L175.1 82.6L163.1 82.6L163 72.9L162.9 63.1L161.8 65.3C156.6 76 147.8 81.8 133.4 84L129.9 84.6L123 84.6L116.1 84.6L112.5 84C97.5 81.7 88.2 75.2 83.5 63.9C82.9 62.5 82.7 62.6 82.1 64.3C77.5 78.5 63.5 86.1 42.1 86.1C17 86 3.6 76.3 0.3 55.7L-0.1 52.9L-0.1 45L-0.1 37.1L11.9 37.1L23.9 37.1L24 42.9C24.4 56.5 28.5 60.5 42.3 60.5L46.4 60.5L49 60C55.4 58.7 59 55.5 60.1 49.8L60.5 48L60.5 26L60.5 4.1L60.8 3.8C61.2 3.4 84.4 3.4 84.6 3.7C84.7 3.9 84.8 6.4 84.8 9.3C84.8 12.2 84.9 15.1 85 15.8L85.1 17.1L86.3 15.3C93 5.2 103.8 0.5 120.9 0.1C142 -0.4 155.1 5.6 161.4 18.8C162.1 20.1 162.7 21.2 162.8 21.2C162.9 21.2 163 16.9 163.1 11.7L163.1 2.1L175.2 2.1L187.2 2L187.3 15.7L187.4 29.4L192.7 29.4L197.9 29.5L198.9 28.3C199.4 27.7 202.3 24.2 205.3 20.6C208.2 17 212.8 11.5 215.5 8.2C218.2 5 220.5 2.3 220.6 2.2C221 1.9 252.2 2 252.2 2.2C252.2 2.4 245.5 10.9 237.4 21.1C229.2 31.4 222.5 39.9 222.5 40.1C222.6 40.4 232.5 52.5 238.9 60.1L240.4 61.9L245.6 61.9L250.9 61.9L250.9 48.2L251 34.5L251.4 34.5C253.6 34.4 275.1 34.5 275.2 34.6C275.2 34.6 275.2 38.6 275.3 43.5C275.3 48.4 275.4 52.8 275.5 53.3L275.7 54.1L276.8 51.9C282.9 40 294.6 34.1 313 33.6C339.6 32.9 354 43 357.2 64.6L357.6 67.6L357.6 75.9C357.6 98.3 351.4 109.4 335.5 115.2C329.1 117.6 316.3 118.9 307.8 118ZM318.3 92.5C326.9 91.7 331.1 88.7 332.8 82.4L333.2 80.4L333.2 75.9L333.2 71.3L332.8 69.4C331.1 63 326.9 60.1 318 59.3C306.5 58.2 299.2 62 297.3 69.9L296.9 71.9L296.9 76.1L296.9 80.4L297.5 82.3C299.2 88.7 303.4 91.7 311.6 92.5C314.5 92.8 315.6 92.8 318.3 92.5ZM128.5 58.6C135.4 57.6 139.1 54.6 140.6 48.8L141.1 47.1L141.1 42.5C141.1 31.5 137.7 27.3 127.5 25.8C116 24.2 107.7 27.8 105.3 35.4L104.9 36.9L104.9 42.4L104.9 47.9L105.5 49.8C108 57.2 116.6 60.5 128.5 58.6Z"/></symbol>
+</svg>
+
+<header>
+<div class="w hd">
+  <a class="logo" href="#" aria-label="Jokko, accueil"><svg role="img" aria-label="Jokko"><use href="#jk"/></svg></a>
+  <input type="checkbox" id="m" aria-label="Ouvrir le menu">
+  <label class="mb" for="m" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+  <nav aria-label="Navigation principale">
+    <a href="maquettes.html">Maquettes</a>
+    <a href="gabarits.html">Modèles de gabarits</a>
+    <a href="ia.html">Création avec IA</a>
+    <a href="labo.html">Labo d’emballage</a>
+    <a href="#entreprise">Entreprise</a>
+    <a href="tarifs.html">Tarification</a>
+  </nav>
+  <div class="act">
+    <span class="lg">Français</span>
+    <a class="b o s" href="connexion.html">Se connecter</a>
+    <a class="b s" href="connexion.html#inscription">S’inscrire</a>
+  </div>
+</div>
+</header>
+
+<main id="contenu">
+<div class="hero">
+<div class="w">
+  <h1>Maquettes d’emballage et <em>gabarits de découpe</em>, tout est sur Jokko</h1>
+  <p class="sub">Visualisez vos emballages en 3D, générez des gabarits prêts à imprimer et laissez l’IA vous souffler des idées, de la première esquisse jusqu’à l’impression.</p>
+  <div class="h3">
+    <a class="hc" href="maquettes.html"><b>Générateur de maquettes</b><span>Explorer →</span><svg><use href="#box"/></svg></a>
+    <a class="hc" href="ia.html"><b>Conception d’emballages par IA</b><span>Essayer →</span><svg><use href="#spark"/></svg></a>
+    <a class="hc" href="gabarits.html"><b>Créateur de gabarits</b><span>Créer →</span><svg><use href="#die"/></svg></a>
+  </div>
+</div>
+</div>
+
+<section id="maquettes">
+<div class="w">
+  <h2>Principales catégories de maquettes</h2>
+  <div class="g">
+    <a class="c" href="maquettes.html?p=box"><svg><use href="#box"/></svg><b>Boîte</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=tee"><svg><use href="#tee"/></svg><b>T‑shirt</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=pouch"><svg><use href="#pouch"/></svg><b>Pochette / Sac</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#book"/></svg><b>Livre</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=bottle"><svg><use href="#bottle"/></svg><b>Bouteille</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=can"><svg><use href="#can"/></svg><b>Canette</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=tube"><svg><use href="#tube"/></svg><b>Tube</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#cup"/></svg><b>Gobelet / Contenant</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#food"/></svg><b>Emballage alimentaire</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#phone"/></svg><b>Smartphone</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=mug"><svg><use href="#mug"/></svg><b>Mug</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#mag"/></svg><b>Magazine</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#hood"/></svg><b>Hoodie</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#flask"/></svg><b>Gourde</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#gift"/></svg><b>Boîte cadeau</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=bag"><svg><use href="#bag"/></svg><b>Sac en papier</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#tray"/></svg><b>Emballage pour pizza</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#flask"/></svg><b>Flacon de compléments</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#lid"/></svg><b>Boîte d’expédition</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html?p=bottle"><svg><use href="#bottle"/></svg><b>Bouteille en plastique</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#cube"/></svg><b>Boîte produit</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#bag"/></svg><b>Boîte avec poignée</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#can"/></svg><b>Bocal</b><small>Maquettes</small></a>
+    <a class="c" href="maquettes.html"><svg><use href="#mag"/></svg><b>Impression</b><small>Maquettes</small></a>
+  </div>
+  <p class="more"><a class="b o" href="modeles.html#maquettes">Voir toutes les maquettes</a></p>
+</div>
+</section>
+
+<section id="gabarits" class="alt">
+<div class="w">
+  <h2>Principales catégories de gabarits</h2>
+  <div class="g">
+    <a class="c" href="gabarits.html"><svg><use href="#die"/></svg><b>Boîte pliante</b><small>Modèles</small></a>
+    <a class="c" href="gabarits.html?type=tuck"><svg><use href="#die2"/></svg><b>Boîte à rabat</b><small>Modèles</small></a>
+    <a class="c" href="gabarits.html?type=bag"><svg><use href="#bag"/></svg><b>Sac en papier</b><small>Modèles</small></a>
+    <a class="c" href="gabarits.html?type=lid"><svg><use href="#lid"/></svg><b>Boîte avec couvercle</b><small>Modèles</small></a>
+    <a class="c" href="gabarits.html?type=display"><svg><use href="#food"/></svg><b>Boîte de présentation</b><small>Modèles</small></a>
+    <a class="c" href="gabarits.html?type=tray"><svg><use href="#tray"/></svg><b>Boîte plateau</b><small>Modèles</small></a>
+    <a class="c" href="gabarits.html"><svg><use href="#gift"/></svg><b>Boîte rigide</b><small>Modèles</small></a>
+    <a class="c" href="gabarits.html?type=env"><svg><use href="#env"/></svg><b>Enveloppe</b><small>Modèles</small></a>
+  </div>
+  <p class="more"><a class="b o" href="modeles.html#gabarits">Voir tous les modèles de gabarits</a></p>
+</div>
+</section>
+
+<section id="outils">
+<div class="w">
+  <h2>Les outils de Jokko</h2>
+
+  <div class="t" id="generateur">
+    <div class="tv"><svg><use href="#box"/></svg><svg><use href="#tee"/></svg></div>
+    <div>
+      <h3>Un générateur de maquettes en ligne, simple et rapide</h3>
+      <p>Emballage, livre ou T‑shirt : importez votre visuel et découvrez‑le aussitôt sur un aperçu 3D. Quelques clics suffisent pour montrer votre produit sous son meilleur jour.</p>
+      <p>Choisissez la maquette qui vous convient et lancez‑vous.</p>
+      <div class="r"><a class="b" href="maquettes.html">Créer une maquette</a><a class="b o" href="#tous">En savoir plus</a></div>
+    </div>
+  </div>
+
+  <div class="t" id="createur">
+    <div class="tv"><svg><use href="#die"/></svg><svg><use href="#die2"/></svg></div>
+    <div>
+      <h3>Un créateur de gabarits de niveau professionnel</h3>
+      <p>Réglez les dimensions, le matériau et l’épaisseur du carton en quelques étapes : vous obtenez immédiatement un gabarit de découpe prêt pour l’impression.</p>
+      <p>Partez du modèle de boîte de votre choix et adaptez‑le à votre produit.</p>
+      <div class="r"><a class="b" href="gabarits.html">Créer un gabarit</a><a class="b o" href="#tous">En savoir plus</a></div>
+    </div>
+  </div>
+
+  <div class="t" id="labo">
+    <div class="tv"><svg><use href="#cube"/></svg><svg><use href="#bottle"/></svg></div>
+    <div>
+      <h3>Un studio 3D pensé pour les non‑spécialistes</h3>
+      <p>Aucune expérience en design n’est requise. Piochez parmi les scènes, modèles et éléments proposés, combinez‑les, puis ajustez l’angle et l’éclairage pour obtenir un rendu digne d’un studio photo.</p>
+      <p>Donnez vie à votre produit dès maintenant.</p>
+      <div class="r"><a class="b" href="labo.html">Commencer en 3D</a><a class="b o" href="#tous">En savoir plus</a></div>
+    </div>
+  </div>
+
+  <div class="t" id="ia">
+    <div class="tv"><svg><use href="#img"/></svg><svg><use href="#spark"/></svg></div>
+    <div>
+      <h3>Un générateur de fonds par IA pour vos visuels produit</h3>
+      <p>Plus besoin d’organiser une séance photo coûteuse. Importez l’image de votre produit : l’IA propose des décors sur mesure qui s’accordent avec lui et le mettent en scène de façon réaliste.</p>
+      <p>Créez dès aujourd’hui des fonds de qualité professionnelle.</p>
+      <div class="r"><a class="b" href="ia.html">Générer un fond IA</a><a class="b o" href="#tous">En savoir plus</a></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="tous" class="alt">
+<div class="w">
+  <h2>Tous les outils</h2>
+  <div class="ch">
+    <a href="maquettes.html">Générateur de maquettes</a>
+    <a href="gabarits.html">Générateur de gabarits</a>
+    <a href="labo.html">Logiciel de modélisation 3D</a>
+    <a href="gabarits.html">Gabarit vers maquette 3D</a>
+    <a href="maquettes.html">Maquette de smartphone</a>
+    <a href="maquettes.html">Maquette de T‑shirt</a>
+    <a href="maquettes.html">Maquette de boîte à pizza</a>
+    <a href="gabarits.html">Créateur de modèle de boîte</a>
+    <a href="gabarits.html">Créateur de modèle de boîte en papier</a>
+    <a class="ai" href="ia.html">✦ Conception d’emballage par IA</a>
+    <a class="ai" href="ia.html">✦ Générateur de vidéos IA</a>
+    <a class="ai" href="ia.html">✦ Générateur de fonds IA</a>
+    <a class="ai" href="ia.html">✦ Générateur de logos IA</a>
+  </div>
+</div>
+</section>
+
+<section id="entreprise">
+<div class="w">
+  <h2>Pour les entreprises</h2>
+  <div class="k">
+    <div><h3>Service d’impression</h3><p>Faites imprimer vos emballages à partir de vos gabarits et maquettes validés, sans ressaisie des fichiers.</p><a class="lk" href="contact.html">Demander un devis →</a></div>
+    <div><h3>API de l’éditeur</h3><p>Intégrez l’éditeur d’emballages et la visualisation 3D directement dans votre site ou votre boutique en ligne.</p><a class="lk" href="contact.html">Parler à l’équipe →</a></div>
+    <div><h3>Léger, même en connexion lente</h3><p>Page d’accueil de moins de 50 Ko, sans police ni script externe, et consultable hors ligne après la première visite.</p></div>
+  </div>
+</div>
+</section>
+
+<div class="cta" id="demarrer"><div>
+  <h2>Démarrez votre <i>aventure design</i> avec Jokko !</h2>
+  <a class="b" href="maquettes.html">Créer une maquette</a> <a class="b o" href="tarifs.html">Voir les tarifs</a>
+</div></div>
+</main>
+
+<footer>
+<div class="w">
+  <a class="logo" href="#"><svg role="img" aria-label="Jokko"><use href="#jk"/></svg></a>
+  <div class="f">
+    <div><b>Maquettes</b><a href="modeles.html#maquettes">Toutes les maquettes</a><a href="#maquettes">Boîtes</a><a href="#maquettes">Bouteilles</a><a href="#maquettes">Emballage alimentaire</a><a href="#maquettes">Pochettes, sachets et sacs</a><a href="#maquettes">Canettes</a><a href="#maquettes">Bocaux</a><a href="#maquettes">Tubes</a><a href="#maquettes">Contenants, tasses et bols</a><a href="#maquettes">Vêtements</a><a href="#maquettes">Appareils</a><a href="#maquettes">Impressions</a><a href="#maquettes">Autres</a></div>
+    <div><b>Gabarits</b><a href="modeles.html#gabarits">Tous les gabarits</a><a href="#gabarits">Boîtes cadeaux</a><a href="#gabarits">Boîtes à faire soi‑même</a><a href="#gabarits">Boîtes d’expédition</a><a href="#gabarits">Boîtes postales</a><a href="#gabarits">Alimentation</a><a href="#gabarits">Jouets</a><a href="#gabarits">Café</a><a href="#gabarits">Tabac</a><a href="#gabarits">Soins personnels</a><a href="#gabarits">Boissons</a><a href="#gabarits">Bureau</a><a href="#gabarits">Bonbons</a><a href="#gabarits">Médicaments</a><a href="#gabarits">Alcool</a><a href="#gabarits">Lait et yaourt</a></div>
+    <div><b>Outils</b><a href="#tous">Tous les outils</a><a href="maquettes.html">Générateur de maquettes</a><a href="gabarits.html">Générateur de gabarits</a><a href="labo.html">Logiciel de modélisation 3D</a><a href="gabarits.html">Gabarit vers maquette 3D</a><a href="maquettes.html">Maquette de smartphone</a><a href="maquettes.html">Maquette de T‑shirt</a><a href="maquettes.html">Maquette de boîte à pizza</a><a href="gabarits.html">Créateur de modèle de boîte</a><a href="gabarits.html">Modèle de boîte en papier</a></div>
+    <div><b>Outils IA</b><a href="ia.html">Conception d’emballage par IA</a><a href="ia.html">Générateur de vidéos IA</a><a href="ia.html">Générateur de fonds IA</a><a href="ia.html">Générateur de logos IA</a></div>
+    <div><b>Entreprise</b><a href="#entreprise">Service d’impression</a><a href="#entreprise">API de l’éditeur</a></div>
+    <div><b>Jokko</b><a href="contact.html">Programme d’influenceurs</a><a href="a-propos.html">À propos de nous</a><a href="contact.html">Contactez‑nous</a></div>
+  </div>
+  <div class="cp"><span>© 2026 Jokko</span><span><a href="confidentialite.html">Politique de confidentialité</a> · <a href="#">Conditions de service</a></span></div>
+</div>
+</footer>
+
+<script>
+document.querySelectorAll('nav a').forEach(function(a){a.onclick=function(){document.getElementById('m').checked=false}});
+if('serviceWorker'in navigator&&location.protocol==='https:')addEventListener('load',function(){navigator.serviceWorker.register('sw.js')});
+</script>
+</body>
+</html>
